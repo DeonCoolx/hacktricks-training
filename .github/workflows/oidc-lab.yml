@@ -22,10 +22,7 @@ jobs:
         run: aws sts get-caller-identity                                                     
                   
       - name: List Secrets
-        run: aws secretsmanager list-secrets --region us-east-1
-
+        run: aws secretsmanager list-secrets --region us-east-1 --query 'SecretList[*].Name' --output text
+                                                                                               
       - name: Read Flag                                                                      
-        run: |
-          aws secretsmanager get-secret-value \                                              
-             --secret-id flag_sts_lab_2 \
-            --region us-east-1
+        run: aws secretsmanager get-secret-value --secret-id flag_sts_lab_2 --region us-east-1       
